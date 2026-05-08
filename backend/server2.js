@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-
+const PORT = process.env.PORT || 5000;
 const userRoutes = require('./routes/userRoutes');
 
 const app = express();
@@ -13,6 +13,8 @@ app.use(express.json());
 
 app.use("/", userRoutes);
 
-app.listen(5020, () => {
-    console.log("server running");
+
+
+app.listen(PORT, () => {
+    console.log(`Server running on ${PORT}`);
 });
