@@ -3,7 +3,7 @@ const db = require('../config/db');
 // GET USERS
 exports.getUsers = (req, res) => {
 
-    const sql = "SELECT * FROM user";
+    const sql = "SELECT * FROM users";
 
     db.query(sql, (err, result) => {
 
@@ -33,7 +33,7 @@ exports.addUser = (req, res) => {
         return;
     }
 
-    const sql = "INSERT INTO user(name) VALUES(?)";
+    const sql = "INSERT INTO users(name) VALUES(?)";
 
     db.query(sql, [name], (err, result) => {
 
@@ -59,7 +59,7 @@ exports.deleteUser = (req, res) => {
 
     const id = req.params.id;
 
-    const sql = "DELETE FROM user WHERE id=?";
+    const sql = "DELETE FROM users WHERE id=?";
 
     db.query(sql, [id], (err, result) => {
 
@@ -92,7 +92,7 @@ exports.updateUser = (req, res) => {
         return;
     }
 
-    const sql = "UPDATE user SET name=? WHERE id=?";
+    const sql = "UPDATE users SET name=? WHERE id=?";
 
     db.query(sql, [name, id], (err, result) => {
 
