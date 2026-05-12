@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({
     origin: [
         'https://crud-dem.netlify.app/',
-        'http://localhost:5020'
+        'http://localhost:5000'
     ],
     credentials: true
 }));
