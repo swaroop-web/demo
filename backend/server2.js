@@ -7,12 +7,12 @@ const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5020;
 
 app.use(cors({
     origin: [
-        'https://crud-dem.netlify.app/',
-        'http://localhost:5000'
+        'https://resilient-brigadeiros-9f8e1b.netlify.app',
+        'http://localhost:5020'
     ],
     credentials: true
 }));
