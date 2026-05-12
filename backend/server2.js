@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors({
     origin: [
-        'https://resilient-brigadeiros-9f8e1b.netlify.app',
+        'https://crud-dem.netlify.app/',
         'http://localhost:5020'
     ],
     credentials: true
