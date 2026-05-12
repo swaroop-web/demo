@@ -9,13 +9,7 @@ const app = express();
 
 const PORT = process.env.PORT || 5020;
 
-app.use(cors({
-    origin: [
-        'https://resilient-brigadeiros-9f8e1b.netlify.app',
-        'http://localhost:5020'
-    ],
-    credentials: true
-}));
+app.use(cors());
 
 app.use(express.json());
 
