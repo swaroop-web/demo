@@ -1,77 +1,113 @@
 const db = require('../config/db');
 
-exports.getUsers = (req,res)=>{
+// GET USERS
+exports.getUsers = (req, res) => {
 
-    const sql = "select * from user";
+    const sql = "SELECT * FROM user";
 
-    db.query(sql,(err,result)=>{
+    db.query(sql, (err, result) => {
 
-        if(err){
-            res.status(500).send("error occured");
+        if (err) {
+            console.log(err);
+            res.status(500).json({
+                message: "Error fetching users"
+            });
             return;
         }
 
-        res.json(result);
+        res.status(200).json(result);
 
     });
 
 };
 
-
-exports.addUser = (req,res)=>{
+// ADD USER
+exports.addUser = (req, res) => {
 
     const name = req.body.name;
 
-    if(!name || name.trim()===""){
-        res.status(400).send("name required");
+    if (!name || name.trim() === "") {
+        res.status(400).json({
+            message: "Name is required"
+        });
         return;
     }
 
-    const sql = "insert into user(name) values(?)";
+    const sql = "INSERT INTO user(name) VALUES(?)";
 
-    db.query(sql,[name],(err,result)=>{
+    db.query(sql, [name], (err, result) => {
 
-        if(err){
-            res.status(500).send("error occured");
+        if (err) {
+            console.log(err);
+            res.status(500).json({
+                message: "Error adding user"
+            });
             return;
         }
 
-        res.send("user added successfully");
+        res.status(201).json({
+            message: "User added successfully",
+            id: result.insertId
+        });
 
     });
 
 };
 
-exports.deleteUser=(req,res)=>{
-    const id=req.params.id;
+// DELETE USER
+exports.deleteUser = (req, res) => {
 
-    const sql="delete from user where id=?";
+    const id = req.params.id;
 
-    db.query(sql,[id],(err,result)=>{
-        if(err){
-            res.status(500).send("error occured");
+    const sql = "DELETE FROM user WHERE id=?";
+
+    db.query(sql, [id], (err, result) => {
+
+        if (err) {
+            console.log(err);
+            res.status(500).json({
+                message: "Error deleting user"
+            });
             return;
         }
-        res.send("user deleted successfully");
+
+        res.status(200).json({
+            message: "User deleted successfully"
+        });
 
     });
-}
 
-exports.updateUser=(req,res)=>{
-    const id=req.params.id;
-    const name=req.params.name;
-    if(!name || name.trim()===""){
-        res.status(400).send("enter name ");
+};
+
+// UPDATE USER
+exports.updateUser = (req, res) => {
+
+    const id = req.params.id;
+    const name = req.params.name;
+
+    if (!name || name.trim() === "") {
+        res.status(400).json({
+            message: "Enter name"
+        });
         return;
     }
 
-    const sql="update user set name=? where id=?";
+    const sql = "UPDATE user SET name=? WHERE id=?";
 
-    db.query(sql,[name,id],(err,result)=>{
-        if(err){
-            res.status(500).send("error occured");
+    db.query(sql, [name, id], (err, result) => {
+
+        if (err) {
+            console.log(err);
+            res.status(500).json({
+                message: "Error updating user"
+            });
             return;
         }
-        res.send(result);
+
+        res.status(200).json({
+            message: "User updated successfully"
+        });
+
     });
-}
+
+};
